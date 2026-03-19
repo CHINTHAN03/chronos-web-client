@@ -61,26 +61,30 @@ Secure, token-based authentication node utilizing cryptographic credential verif
 
 ##  Local Deployment Protocol
 
-### 1. Initialize the Core Backend
+## 1. Initialize the Core Backend
 
-# Clone the API repository
+### Clone the API repository
+The repository can be found at https://github.com/CHINTHAN03/chronos-engine-core
 
-# Configure environment variables (Create a .env file)
-JWT_SECRET=your_cryptographic_secret_key
-GEMINI_API_KEY=your_google_gemini_api_key
+---
+### Configure environment variables (Create a .env file)
+JWT_SECRET= cryptographic_secret_key
 
-# Boot the Spring application
+GEMINI_API_KEY= google_gemini_api_key
+
+---
+### Boot the Spring application
 ./mvnw spring-boot:run
 
 
-### 2. Initialize the Web Client
-# Clone the client repository
+## 2. Initialize the Web Client
+### Clone the client repository
 git clone
 
-# Install dependencies
+### Install dependencies
 npm install
 
-# Boot the Vite development server
+### Boot the Vite development server
 npm run dev
 
 

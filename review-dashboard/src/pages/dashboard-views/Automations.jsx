@@ -43,18 +43,22 @@ export default function Automations() {
             const commitHash = Math.random().toString(16).substring(2, 9);
             const dateStr = new Date().toISOString();
 
-            const header = `# 🚀 Release ${version}\n\n`;
+            // --- SANITIZED HEADERS & METADATA ---
+            const header = `# Release ${version}\n\n`;
             let metadata = `> **Environment:** \`${environment}\` | **Audience:** \`${audience}\`\n`;
             metadata += `> **Pipeline ID:** \`#${pipelineId}\` | **Latest Commit:** \`${commitHash}\`\n`;
             
             if (ticketIds || approver) metadata += `> **Tickets Resolved:** \`${ticketIds || 'None Linked'}\` | **Authorized By:** \`${approver || 'Auto-Merged'}\`\n`;
-            if (requiresDbMigration || includeRollback) metadata += `> **DB Migration:** \`${requiresDbMigration ? 'REQUIRED ⚠️' : 'None'}\` | **Rollback Protocol:** \`${includeRollback ? 'ATTACHED 🛡️' : 'Standard'}\`\n`;
+            
+            // Removed emojis, replaced with professional status text
+            if (requiresDbMigration || includeRollback) metadata += `> **DB Migration:** \`${requiresDbMigration ? 'CRITICAL REQUIRED' : 'None'}\` | **Rollback Protocol:** \`${includeRollback ? 'ACTIVE' : 'Standard'}\`\n`;
             
             metadata += `\n---\n\n`;
             
             let rollbackRunbook = '';
             if (includeRollback) {
-                rollbackRunbook = `\n\n---\n\n### 🛡️ Emergency Rollback Protocol\n*If critical telemetry fails post-deployment, execute the following immediately:*\n1. **Halt Traffic:** Route load balancer to static maintenance page.\n2. **Revert Image:** \`docker pull chronos-backend:previous-stable\`\n3. **DB Restore:** ${requiresDbMigration ? 'Execute \`flyway:undo\` script to reverse schema changes.' : 'No schema changes. Data is safe.'}\n4. **Restart:** \`docker-compose up -d --force-recreate\`\n5. **Notify:** Alert Lead DevOps and update status page.`;
+                // Removed shield emoji
+                rollbackRunbook = `\n\n---\n\n### Emergency Rollback Protocol\n*If critical telemetry fails post-deployment, execute the following immediately:*\n1. **Halt Traffic:** Route load balancer to static maintenance page.\n2. **Revert Image:** \`docker pull chronos-backend:previous-stable\`\n3. **DB Restore:** ${requiresDbMigration ? 'Execute \`flyway:undo\` script to reverse schema changes.' : 'No schema changes. Data is safe.'}\n4. **Restart:** \`docker-compose up -d --force-recreate\`\n5. **Notify:** Alert Lead DevOps and update status page.`;
             }
 
             const mdContent = header + metadata + response.data.content + rollbackRunbook;

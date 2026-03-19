@@ -66,13 +66,13 @@ Secure, token-based authentication node utilizing cryptographic credential verif
 ### Clone the API repository
 The repository can be found at https://github.com/CHINTHAN03/chronos-engine-core
 
----
+
 ### Configure environment variables (Create a .env file)
 JWT_SECRET= cryptographic_secret_key
 
 GEMINI_API_KEY= google_gemini_api_key
 
----
+
 ### Boot the Spring application
 ./mvnw spring-boot:run
 
